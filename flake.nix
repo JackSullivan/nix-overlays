@@ -9,9 +9,7 @@
       };
       overlay = final: prev:
         prev.lib.composeManyExtensions (prev.lib.attrValues overlaySet);
-      overlays = overlaySet // {
-        default = overlay;
-      };
+      overlays = overlaySet // { default = overlay; };
     in { inherit overlays; };
 
 }

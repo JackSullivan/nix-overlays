@@ -2,7 +2,7 @@ final: prev:
 
 let
   inherit (prev.lib) recursiveUpdate readFile;
-  inherit (prev) runCommand writeTextFile ;
+  inherit (prev) runCommand writeTextFile;
   inherit (prev.lib.generators) toJSON;
   py = prev.python3.withPackages (p: [ p.xmltodict p.pyyaml ]);
   toXMLFile = { name, attrs, destination ? "" }:
@@ -41,6 +41,8 @@ let
     });
 in {
   lib = prev.lib // {
-    generators = prev.lib.generators // { inherit toXMLFile toXML toYAMLFile toYAML; };
+    generators = {
+      inherit toXMLFile toXML toYAMLFile toYAML;
+    } // prev.lib.generators;
   };
 }

@@ -9,7 +9,5 @@ let
       ln -s $src/lib/libgomp.so $out/lib/libgomp.so.1
     '';
   };
-  rdrview = prev.callPackage ../pkgs/rdrview.nix {};
-in {
- inherit libgomp1 rdrview;
-}
+  rdrview = prev.callPackage ../pkgs/rdrview.nix { };
+in { inherit libgomp1 rdrview; }

@@ -10,6 +10,9 @@
       overlay = final: prev:
         prev.lib.composeManyExtensions (prev.lib.attrValues overlaySet);
       overlays = overlaySet // { default = overlay; };
-    in { inherit overlays; };
+      nixosModules = {
+        maven = import ./modules/maven;
+      };
+    in { inherit overlays nixosModules; };
 
 }

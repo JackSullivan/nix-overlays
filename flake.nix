@@ -12,12 +12,12 @@
       overlays = overlaySet // { default = overlay; };
       templates = {
         basic = {
-          path = ./templates/basic.nix;
+          path = ./templates/basic;
           description = "Basic flake for multisystem nixpkgs";
         };
 
         devShell = {
-          path = ./templates/devShell.nix;
+          path = ./templates/devShell;
           description = "Basic flake for multisystem devShells";
         };
       };

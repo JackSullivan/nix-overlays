@@ -21,6 +21,9 @@
           description = "Basic flake for multisystem devShells";
         };
       };
-    in { inherit overlays templates; };
+      nixosModules = {
+        maven = import ./modules/maven;
+      };
+    in { inherit overlays templates nixosModules; };
 
 }

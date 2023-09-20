@@ -8,7 +8,7 @@ let
     attr = either primitive (attrsOf primitive);
   in attrsOf (attrsOf attr);
   profileAttrs = with types; 
-    attrsOf (attrsOf mvnAttrs);
+    either str (attrsOf (attrsOf mvnAttrs));
   mkSettingsXml = pkgs.callPackage ./settingsXml.nix {};
 in {
   options.programs.maven = {
@@ -34,7 +34,8 @@ in {
     };
 
     profiles = mkOption {
-      type = with types; either profileAttrs (attrsOf str);
+      #type = with types; either profileAttrs (attrsOf str);
+      type = profileAttrs;
       default = {};
       defaultText = lib.literalExpression "{}";
       description = "profiles";

@@ -34,7 +34,7 @@ in {
     };
 
     profiles = mkOption {
-      type = profileAttrs;
+      type = with types; either profileAttrs (attrsOf str);
       default = {};
       defaultText = lib.literalExpression "{}";
       description = "profiles";

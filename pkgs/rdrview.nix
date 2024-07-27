@@ -12,5 +12,6 @@ stdenv.mkDerivation rec {
 
   makeFlags = [ "PREFIX=$(out)" ];
 
-  buildInputs = [ libxml2 curl ] ++ (if stdenv.system == "x86_64-linux" then [libseccomp] else []);
+  buildInputs = [ libxml2 curl ]
+    ++ (if stdenv.system == "x86_64-linux" then [ libseccomp ] else [ ]);
 }

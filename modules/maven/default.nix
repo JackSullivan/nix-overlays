@@ -3,13 +3,14 @@
 let
   inherit (lib) mkEnableOption mkOption mkIf types;
   cfg = config.programs.maven;
-  mvnAttrs = with types; let
-    primitive = either str (either bool int);
-    attr = either primitive (attrsOf primitive);
-  in attrsOf (attrsOf attr);
+  mvnAttrs = with types;
+    let
+      primitive = either str (either bool int);
+      attr = either primitive (attrsOf primitive);
+    in attrsOf (attrsOf attr);
   profileAttrs = with types; attrs;
-    #(attrsOf (attrsOf mvnAttrs));
-  mkSettingsXml = pkgs.callPackage ./settingsXml.nix {};
+  #(attrsOf (attrsOf mvnAttrs));
+  mkSettingsXml = pkgs.callPackage ./settingsXml.nix { };
 in {
   options.programs.maven = {
     enable = mkEnableOption "maven settings";
@@ -21,28 +22,28 @@ in {
     };
     servers = mkOption {
       type = mvnAttrs;
-      default = {};
+      default = { };
       defaultText = lib.literalExpression "{}";
       description = "server attrs";
     };
 
     proxies = mkOption {
       type = mvnAttrs;
-      default = {};
+      default = { };
       defaultText = lib.literalExpression "{}";
       description = "proxies";
     };
 
     profiles = mkOption {
       type = with types; profileAttrs;
-      default = {};
+      default = { };
       defaultText = lib.literalExpression "{}";
       description = "profiles";
     };
 
     activeProfiles = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
       defaultText = lib.literalExpression "[]";
       description = "active profiles";
     };
